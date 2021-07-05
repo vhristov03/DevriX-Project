@@ -1,0 +1,20 @@
+05.07.2021
+
+Local server setup (using XAMPP)
+Created database & tables
+Checking out PHP basics
+	- https://prnt.sc/18pmvfi (using php)
+Created simple register form to test
+Trying to connect with the database and insert info
+Connected and inserted successfully
+Successfully implemented register/login (connected to the database)
+Created 'About' page
+Altered database and tables
+Working on 'Jobs' page
+Successfully implemented 'Jobs' page
+Started working on admin panel where you can approve/reject new job listings
+Admin panel is ready
+
+I think this is enough for today.
+
+06.07.2021

@@ -14,9 +14,6 @@
     $sql = "insert into `user` (`username`,`email`,`password_hash`) values('{$name}','{$email}','{$password}');";
     
     $database->query($sql) or die("error");
+    header('Location: '.$uri.'/pages/home.php');
 ?>
 
-<form name="info_transfer" action="home.php" method="post">
-            <br><input type="hidden" id="1" name="name" value=<?php echo htmlspecialchars($name); ?>>
-</form>
-<script>document.info_transfer.submit()</script>
