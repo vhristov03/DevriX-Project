@@ -29,25 +29,58 @@ ul {
 
 .job {
   display:block;
-  margin:auto;
+  margin-left:10px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:10px;
   background-color:#eeeeee;
-  min-width:1000px;
+  width:500px;
   height:auto;
+  border: solid gray 1px;
 }
+
 
 .wide {
   width:200px;
 
 }
 
-
-.form-submit-button {
+.job .button_green {
+  cursor: pointer;
   background: #1a9b00;
   color: white;
   border-style: outset;
   border-color: #1a9b00;
-  height: 50px;
+  height: 30px;
   width: 100px;
   font: bold 15px arial, sans-serif;
   text-shadow:none;
+}
+
+.job .button_red {
+  cursor: pointer;
+  background: #d40c0c;
+  color: white;
+  border-style: outset;
+  border-color: #d40c0c;
+  height: 30px;
+  width: 100px;
+  font: bold 15px arial, sans-serif;
+  text-shadow:none;
+  
+}
+
+.myform{
+  padding: 10px;
+}
+
+.myform .txtarea{
+  width: 700px;
+  height: 200px;
+  resize: none;
+}
+
+.myform .txt{
+  width: 200px;
+  height: 25px;
 }

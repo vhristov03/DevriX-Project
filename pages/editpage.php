@@ -29,22 +29,22 @@
           while($row = $result->fetch_assoc()) {
             $indexarr[$counter] = $row["id"];
             echo ("<div class='job'>");
-            echo ($row['title']);
-            echo ("<br>");
-            echo ($row['description']);
-            echo ("<br>");
-            echo ($row['salary']);
-            echo ("<br>");
-            echo ($row['company']);
+            echo ($row['title'] . " at " . $row['company'] . "<br><hr>");
+            echo ("Description: " . $row['description'] . "<br><br>");
+            echo ("Salary: " . $row['salary'] . " $" . "<br><hr>");
             echo ("
-            <form action='edit.php' method='post'>
-            <input type='hidden' name='id' id='id' value=$indexarr[$counter]>
-            <input type='submit' value='edit'>
-            </form>
-            <form action='delete.php' method='post'>
-            <input type='hidden' name='id' id='id' value=$indexarr[$counter]>
-            <input type='submit' value='delete'>
-            </form>
+            <div style='float: left;'>
+                <form action='edit.php' method='post'>
+                    <input type='hidden' name='id' id='id' value=$indexarr[$counter]>
+                    <input type='submit' value='Edit' class='button_green'>
+                </form>
+            </div>
+            <div style='float: right;'>
+                <form action='delete.php' method='post'>
+                    <input type='hidden' name='id' id='id' value=$indexarr[$counter]>
+                    <input type='submit' value='Delete' class='button_red'>
+                </form>
+            </div><br><br>
             </div><br><br>
             ");
             $counter++;

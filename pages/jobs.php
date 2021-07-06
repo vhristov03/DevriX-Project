@@ -33,15 +33,12 @@
     
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
+        
           echo ("<div class='job'>");
-          echo ($row['title']);
-          echo ("<br>");
-          echo ($row['description']);
-          echo ("<br>");
-          echo ($row['salary']);
-          echo ("<br>");
-          echo ($row['company']);  
-          echo ("</div><br><br>");  
+          echo ($row['title'] . " at " . $row['company'] . "<br><hr>");
+          echo ("Description: " . $row['description'] . "<br><br>");
+          echo ("Salary: " . $row['salary'] . " $" . "<br>");
+          echo ("</div><br><br>");      
         }
     }
     

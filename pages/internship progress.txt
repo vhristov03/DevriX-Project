@@ -22,3 +22,4 @@ I think this is enough for today.
 Approve/reject scripts are ready
 Edit/Delete page
 Implemented search bar
+Started working on the UI
