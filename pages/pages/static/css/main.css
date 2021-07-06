@@ -1,0 +1,109 @@
+body{
+  background-color: #f8f9ff;
+}
+
+h1{
+  color:#0051ff;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+
+  li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    float:left;
+  }
+
+  .right {
+    float: right;
+  }
+
+  li a:hover:not(.active) {
+    background-color: #111;
+  }
+  
+  .active {
+    background-color: #0051ff;
+  }
+
+.job {
+  display:block;
+  margin-left:10px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:10px;
+  padding-bottom:10px;
+  background-color:white;
+  width:500px;
+  height:auto;
+  border: solid gray 1px;
+}
+
+.job a{
+  text-decoration: none;
+  font:bold;
+  color:#0051ff;
+}
+
+.job .button_green {
+  cursor: pointer;
+  background: #1a9b00;
+  color: white;
+  border-style: outset;
+  border-color: #1a9b00;
+  height: 30px;
+  width: 100px;
+  font: bold 15px arial, sans-serif;
+  text-shadow:none;
+}
+
+.job .button_red {
+  cursor: pointer;
+  background: #d40c0c;
+  color: white;
+  border-style: outset;
+  border-color: #d40c0c;
+  height: 30px;
+  width: 100px;
+  font: bold 15px arial, sans-serif;
+  text-shadow:none;
+  
+}
+
+.gray_button {
+  cursor: pointer;
+  background: #999999;
+  color: white;
+  border-style: outset;
+  border-color: #999999;
+  height: 32px;
+  width: auto;
+  font: bold 15px arial, sans-serif;
+  text-shadow:none;
+  text-decoration: none; 
+  padding: 5px;
+}
+
+.myform{
+  padding: 10px;
+}
+
+.myform .txtarea{
+  width: 700px;
+  height: 200px;
+  resize: none;
+}
+
+.myform .txt{
+  width: 200px;
+  height: 25px;
+}
