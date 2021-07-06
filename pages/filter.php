@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="static/css/main.css"/>
 
     <ul>
-        <li><a href="home.php">Home</a></li>
         <li><a class="active" href="jobs.php">Jobs</a></li>
         <li><a href="about.php">About</a></li>
     </ul>
