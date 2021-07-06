@@ -1,9 +1,5 @@
 <?php 
-    $dbuser = 'root';
-    $dbpass = '';
-    $db = 'main';
-    
-    $database = new mysqli('localhost',$dbuser,$dbpass,$db) or die("Can't connect to database");
+    include 'connect_to_db.php';
 
     $name = $_POST["name"];
     $email = $_POST["email"];

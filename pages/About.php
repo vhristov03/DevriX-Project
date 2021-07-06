@@ -9,7 +9,6 @@
         <li><a href="home.php">Home</a></li>
         <li><a href="jobs.php">Jobs</a></li>
         <li><a class="active" href="about.php">About</a></li>
-        <li><a class ="right" href="profile.php">
     </ul>
 </head>
 

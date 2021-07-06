@@ -18,8 +18,13 @@
     <?php
     
     include 'connect_to_db.php';
-
-    $sql = "select `title`,`description`,`salary`,`company` from `job_listing`";
+    
+    $kw = $_GET["keyword"];
+    $sql = "select `title`,`description`,`salary`,`company` from `job_listing`
+    where
+        `title` like '%$kw%' or
+        `description` like '%$kw%' or
+        `company` like '%$kw%';";
     $result=$database->query($sql) or die("Can't pull information from the database");
 
     echo("There are currently $result->num_rows job listings <br> <a href='create_listing.php'>New offer</a> <br><hr>");
@@ -27,6 +32,9 @@
         <form action='filter.php' method='get'>
         Keyword:<input type='text' name='keyword'>
         <input type='submit' value='search'>
+        </form>
+        <form action='jobs.php' method='post'>
+        <input type='submit' value='show all'>
         </form><br>
     ");
 

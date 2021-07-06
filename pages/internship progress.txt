@@ -18,3 +18,7 @@ Admin panel is ready
 I think this is enough for today.
 
 06.07.2021
+
+Approve/reject scripts are ready
+Edit/Delete page
+Implemented search bar

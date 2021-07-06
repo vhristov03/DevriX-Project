@@ -34,3 +34,20 @@ ul {
   min-width:1000px;
   height:auto;
 }
+
+.wide {
+  width:200px;
+
+}
+
+
+.form-submit-button {
+  background: #1a9b00;
+  color: white;
+  border-style: outset;
+  border-color: #1a9b00;
+  height: 50px;
+  width: 100px;
+  font: bold 15px arial, sans-serif;
+  text-shadow:none;
+}
