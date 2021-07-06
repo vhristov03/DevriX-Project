@@ -10,6 +10,6 @@
     $sql = "insert into `pending_job_listings` (`title`,`description`,`salary`,`company`,`url`) values('{$title}','{$description}',$salary,'{$company}','{$url}');";
     
     $database->query($sql) or die("error");
-    header('Location: '.$uri.'/pages/home.php');
+    header('Location: '.$uri.'/pages/jobs.php');
 ?>
 
