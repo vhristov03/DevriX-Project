@@ -14,7 +14,8 @@
             Company:<br><input type="text" name="company" class="txt"><br>
             Salary:<br><input type="number" name="salary" class="txt"><br>
             Description:<br><textarea  name="description" class="txtarea"></textarea><br>
-            <input type="submit">
+            URL:<br><input type="text" name="url" class="txt"><br><br>
+            <input type="submit" class="gray_button">
         </form>
     
     </body>

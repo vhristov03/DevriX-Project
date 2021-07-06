@@ -1,3 +1,11 @@
+body{
+  background-color: #f8f9ff;
+}
+
+h1{
+  color:#0051ff;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -24,7 +32,7 @@ ul {
   }
   
   .active {
-    background-color: #04AA6D;
+    background-color: #0051ff;
   }
 
 .job {
@@ -33,16 +41,17 @@ ul {
   padding-left:10px;
   padding-right:10px;
   padding-top:10px;
-  background-color:#eeeeee;
+  padding-bottom:10px;
+  background-color:white;
   width:500px;
   height:auto;
   border: solid gray 1px;
 }
 
-
-.wide {
-  width:200px;
-
+.job a{
+  text-decoration: none;
+  font:bold;
+  color:#0051ff;
 }
 
 .job .button_green {
@@ -68,6 +77,20 @@ ul {
   font: bold 15px arial, sans-serif;
   text-shadow:none;
   
+}
+
+.gray_button {
+  cursor: pointer;
+  background: #999999;
+  color: white;
+  border-style: outset;
+  border-color: #999999;
+  height: 32px;
+  width: auto;
+  font: bold 15px arial, sans-serif;
+  text-shadow:none;
+  text-decoration: none; 
+  padding: 5px;
 }
 
 .myform{

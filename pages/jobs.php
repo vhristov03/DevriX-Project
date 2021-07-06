@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="static/css/main.css"/>
 
     <ul>
-        <li><a href="home.php">Home</a></li>
         <li><a class="active" href="jobs.php">Jobs</a></li>
         <li><a href="about.php">About</a></li>
     </ul>
@@ -19,23 +18,21 @@
     
     include 'connect_to_db.php';
 
-    $sql = "select `title`,`description`,`salary`,`company` from `job_listing`";
+    $sql = "select `title`,`description`,`salary`,`company`,`url` from `job_listing`";
     $result=$database->query($sql) or die("Can't pull information from the database");
 
-    echo("There are currently $result->num_rows job listings <br> <a href='create_listing.php'>New offer</a> <br><hr>");
+    echo("There are currently $result->num_rows job listings <br><br> <a href='create_listing.php' class='gray_button'>New offer</a> <br><hr>");
     echo("
-        <form action='filter.php' method='get'>
-        Keyword:<input type='text' name='keyword'>
-        <input type='submit' value='search'>
-        </form><br>
+        <form action='filter.php' method='get' class='myform'>
+        Keyword: <input type='text' name='keyword' class='txt'>
+        <input type='submit' value='Search' class='gray_button'>
+        </form><br><br>
     ");
-
-    
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-        
+          $url = $row["url"];
           echo ("<div class='job'>");
-          echo ($row['title'] . " at " . $row['company'] . "<br><hr>");
+          echo ($row['title'] . " at " . "<a href=$url target='_blank' rel='noopener noreferrer'>" . $row['company'] . "</a><br><hr>");
           echo ("Description: " . $row['description'] . "<br><br>");
           echo ("Salary: " . $row['salary'] . " $" . "<br>");
           echo ("</div><br><br>");      
