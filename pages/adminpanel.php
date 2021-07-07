@@ -20,9 +20,17 @@
 
     echo("There are currently $result->num_rows pending job listings<br><br>");
     echo(" 
-      <form action='editpage.php' method='post'>
-      <input type='submit' value='Edit or delete existing job offers' class='gray_button'>
-      </form><br><hr><br>
+    <div style='float: left;'> 
+        <form action='editpage.php' method='post'>
+            <input type='submit' value='Edit existing job offers' class='gray_button'>
+        </form>
+    </div>
+    <div style='float: right;'> 
+        <form action='jobs.php' method='post'>
+            <input type='submit' value='Back to user side' class='gray_button'>
+        </form>
+    </div>
+    <br><br><hr><br>
       ");
     
     
@@ -37,7 +45,7 @@
             echo ("Description: " . $row['description'] . "<br><br>");
             echo ("Salary: " . $row['salary'] . " $" . "<br><hr>");
             echo ("
-            <div style='float: left;'> 
+                <div style='float: left;'> 
                     <form action='approve.php' method='post'>
                         <input type='hidden' name='id' id='id' value=$indexarr[$counter]>
                         <input type='submit' value='Approve' class='button_green'>

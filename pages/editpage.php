@@ -18,9 +18,16 @@
 
     echo("There are currently $result->num_rows job listings <br><br>");
     echo(" 
-      <form action='adminpanel.php' method='post'>
-      <input type='submit' value='Back to admin panel' class='gray_button'>
-      </form><br><hr><br>
+    <div style='float: left;'> 
+        <form action='adminpanel.php' method='post'>
+            <input type='submit' value='Back to admin panel' class='gray_button'>
+        </form>
+    </div>
+    <div style='float: right;'> 
+        <form action='jobs.php' method='post'>
+            <input type='submit' value='Back to user side' class='gray_button'>
+        </form>
+    </div><br><br><hr><br>>
       ");
     
       $counter = 0;

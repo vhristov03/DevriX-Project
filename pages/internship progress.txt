@@ -23,3 +23,8 @@ Approve/reject scripts are ready
 Edit/Delete page
 Implemented search bar
 Started working on the UI
+Added URLs
+Finished the UI
+Removed home/register pages
+Fixed small bugs
+
