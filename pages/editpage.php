@@ -9,14 +9,28 @@
 <body>
    
     <h1>Job offers:</h1>
-    <?php
+    <?php   
     
+    if(isset($_GET["page"])==true){
+        $page = $_GET["page"];
+        if($page < 1){
+            $page = 1;
+        }
+    }else{
+        $page = 1;
+    }
     include 'connect_to_db.php';
+    $prev = $page-1;
+    $next = $page+1;
+    $page_lim = $prev*3;
 
-    $sql = "select `id`,`title`,`description`,`salary`,`company`,`url` from `job_listing`";
+    $amountsql = "select count(id) from `job_listing`";
+    $amount=$database->query($amountsql)->fetch_row()[0];
+
+    $sql = "select `id`,`title`,`description`,`salary`,`company`,`url` from `job_listing` limit $page_lim,3";
     $result=$database->query($sql) or die("Can't pull information from the database");
 
-    echo("There are currently $result->num_rows job listings <br><br>");
+    echo("There are currently $amount job listings <br><br>");
     echo(" 
     <div style='float: left;'> 
         <form action='adminpanel.php' method='post'>
@@ -27,8 +41,30 @@
         <form action='jobs.php' method='post'>
             <input type='submit' value='Back to user side' class='gray_button'>
         </form>
-    </div><br><br><hr><br>>
+    </div><br><br><hr><br>
       ");
+    if($amount>$page_lim+3){
+        echo("
+        <div>
+            <div style='float:right;'>
+                <form action='editpage.php' method='get' class='myform'>
+                    <input type='hidden' name='page' id='page' value=$next>
+                    <input type='submit' value='>>' class='gray_button'>
+            </form>
+        </div>  
+        ");
+    }
+    if($page!=1){
+        echo("
+            <div style='float:right;'>
+                <form action='editpage.php' method='get' class='myform'>
+                    <input type='hidden' name='page' id='page' value=$prev>
+                    <input type='submit' value='<<' class='gray_button'>
+                </form>
+            </div>
+        </div>
+    ");
+    }
     
       $counter = 0;
       $indexarr = array();

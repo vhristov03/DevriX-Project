@@ -28,3 +28,9 @@ Finished the UI
 Removed home/register pages
 Fixed small bugs
 
+07.07.2021
+
+Added login page for admins
+Added "Return to user side" when logged in as an admin
+Added pagination
+

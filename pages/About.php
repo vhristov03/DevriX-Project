@@ -2,7 +2,12 @@
 <html>
 <head>
     <title>About</title>
-    <?php include 'head.php' ?>>
+    <?php include 'head.php' ?>
+    <ul>
+        <li><a href='jobs.php'>Jobs</a></li>
+        <li><a class='active' href='about.php'>About</a></li>
+        <li><a href='login.php' style='float:right'>Admin</a></li>
+    </ul>
 </head>
 
 <body>

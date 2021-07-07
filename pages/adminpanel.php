@@ -11,14 +11,26 @@
     <h1>Pending job listings:</h1>
     <?php
 
-    
-    
+    if(isset($_GET["page"])==true){
+        $page = $_GET["page"];
+        if($page < 1){
+            $page = 1;
+        }
+    }else{
+        $page = 1;
+    }
     include 'connect_to_db.php';
+    $prev = $page-1;
+    $next = $page+1;
+    $page_lim = $prev*3;
 
-    $sql = "select `id`,`title`,`description`,`salary`,`company`,`url` from `pending_job_listings`";
+    $amountsql = "select count(id) from `pending_job_listings`";
+    $amount=$database->query($amountsql)->fetch_row()[0]; 
+
+    $sql = "select `id`,`title`,`description`,`salary`,`company`,`url` from `pending_job_listings` limit $page_lim,3";
     $result=$database->query($sql) or die("Can't pull information from the database");
 
-    echo("There are currently $result->num_rows pending job listings<br><br>");
+    echo("There are currently $amount pending job listings<br><br>");
     echo(" 
     <div style='float: left;'> 
         <form action='editpage.php' method='post'>
@@ -32,6 +44,28 @@
     </div>
     <br><br><hr><br>
       ");
+    if($amount>$page_lim+3){
+        echo("
+        <div>
+            <div style='float:right;'>
+                <form action='adminpanel.php' method='get' class='myform'>
+                    <input type='hidden' name='page' id='page' value=$next>
+                    <input type='submit' value='>>' class='gray_button'>
+            </form>
+        </div>  
+        ");
+    }
+    if($page!=1){
+        echo("
+            <div style='float:right;'>
+                <form action='adminpanel.php' method='get' class='myform'>
+                    <input type='hidden' name='page' id='page' value=$prev>
+                    <input type='submit' value='<<' class='gray_button'>
+                </form>
+            </div>
+        </div>
+    ");
+    }
     
     
     $counter = 0;
