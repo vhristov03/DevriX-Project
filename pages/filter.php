@@ -15,7 +15,9 @@
    
     <h1>Job offers:</h1>
     <?php
+    //search keyword
     $kw = $_GET["keyword"];
+    //pagination
     if(isset($_GET["page"])==true){
         $page = $_GET["page"];
         if($page < 1){
@@ -24,11 +26,15 @@
     }else{
         $page = 1;
     }
-    include 'connect_to_db.php';
+    //previous page id
     $prev = $page-1;
+    //next page id
     $next = $page+1;
+    //used to select the right posts for the page
     $page_lim = $prev*3;
 
+    //database stuff
+    include 'connect_to_db.php';
     $amountsql = "select count(id) from `job_listing`
     where  
         `title` like '%$kw%' or
@@ -45,6 +51,8 @@
         limit $page_lim,3";
     
     $result=$database->query($sql) or die("Can't pull information from the database");
+
+    //page contents
     echo(" 
         $amount matching job offers <br><br> 
         <a href='create_listing.php' class='gray_button'>New offer</a> <br><hr>

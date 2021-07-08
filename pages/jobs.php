@@ -15,6 +15,7 @@
    
     <h1>Job offers:</h1>
     <?php
+    //pagination
     if(isset($_GET["page"])==true){
         $page = $_GET["page"];
         if($page < 1){
@@ -23,16 +24,19 @@
     }else{
         $page = 1;
     }
-    include 'connect_to_db.php';
+    
     $prev = $page-1;
     $next = $page+1;
     $page_lim = $prev*3;
 
+    //database stuff
+    include 'connect_to_db.php';
     $amountsql = "select count(id) from `job_listing`";
     $amount=$database->query($amountsql)->fetch_row()[0]; 
     $sql = "select `title`,`description`,`salary`,`company`,`url` from `job_listing` limit $page_lim,3";
     $result=$database->query($sql) or die("Can't pull information from the database");
-       
+
+    //page contents
     echo("
         There are currently $amount job listings <br><br>
         <a href='create_listing.php' class='gray_button'>New offer</a> <br><hr>

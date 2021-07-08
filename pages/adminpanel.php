@@ -10,7 +10,7 @@
    
     <h1>Pending job listings:</h1>
     <?php
-
+    //pagination
     if(isset($_GET["page"])==true){
         $page = $_GET["page"];
         if($page < 1){
@@ -19,10 +19,12 @@
     }else{
         $page = 1;
     }
-    include 'connect_to_db.php';
     $prev = $page-1;
     $next = $page+1;
     $page_lim = $prev*3;
+
+    //database stuff
+    include 'connect_to_db.php';
 
     $amountsql = "select count(id) from `pending_job_listings`";
     $amount=$database->query($amountsql)->fetch_row()[0]; 
@@ -30,6 +32,7 @@
     $sql = "select `id`,`title`,`description`,`salary`,`company`,`url` from `pending_job_listings` limit $page_lim,3";
     $result=$database->query($sql) or die("Can't pull information from the database");
 
+    //Page contents
     echo("There are currently $amount pending job listings<br><br>");
     echo(" 
     <div style='float: left;'> 
@@ -44,6 +47,7 @@
     </div>
     <br><br><hr><br>
       ");
+    //pagination
     if($amount>$page_lim+3){
         echo("
         <div>
