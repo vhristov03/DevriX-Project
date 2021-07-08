@@ -34,3 +34,10 @@ Added login page for admins
 Added "Return to user side" when logged in as an admin
 Added pagination
 
+08.07.2021
+
+Added search bars to edit and admin pages as well
+Removed filter.php (now the searching is done on the same page)
+Changed the look of the code (still looks ugly, but its better)
+Added page number
+

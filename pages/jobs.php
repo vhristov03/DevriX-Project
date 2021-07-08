@@ -15,6 +15,9 @@
    
     <h1>Job offers:</h1>
     <?php
+
+    include 'connect_to_db.php';
+
     //pagination
     if(isset($_GET["page"])==true){
         $page = $_GET["page"];
@@ -24,55 +27,83 @@
     }else{
         $page = 1;
     }
+
+    //search
+    if(isset($_GET["keyword"])==true){
+        $kw = mysqli_real_escape_string($database,$_GET["keyword"]);    
+    }else{
+        $kw="";
+    }
     
     $prev = $page-1;
     $next = $page+1;
     $page_lim = $prev*3;
 
+//-----------------------------------------------------------------------------------------------
     //database stuff
-    include 'connect_to_db.php';
-    $amountsql = "select count(id) from `job_listing`";
+    
+        //listings count
+    $amountsql = "select count(id) from `job_listing`
+    where  
+        `title` like '%$kw%' or
+        `description` like '%$kw%' or
+        `company` like '%$kw%'
+    ";
     $amount=$database->query($amountsql)->fetch_row()[0]; 
-    $sql = "select `title`,`description`,`salary`,`company`,`url` from `job_listing` limit $page_lim,3";
+        //listings info
+    $sql = "select `title`,`description`,`salary`,`company`,`url` from `job_listing`  
+    where
+        `title` like '%$kw%' or
+        `description` like '%$kw%' or
+        `company` like '%$kw%'
+        limit $page_lim,3";
+    
     $result=$database->query($sql) or die("Can't pull information from the database");
 
+//-----------------------------------------------------------------------------------------------
+
     //page contents
-    echo("
-        There are currently $amount job listings <br><br>
-        <a href='create_listing.php' class='gray_button'>New offer</a> <br><hr>
+    if($kw===""){
+        echo("There are currently $amount job listings <br><br>");
+    }else{
+        echo("There are $amount matching job listings<br><br>");
+    }
     
-        <div>
-        <div style='float:left;'>
-            <form action='filter.php' method='get' class='myform'>
-                Keyword: <input type='text' name='keyword' class='txt'>
-                <input type='submit' value='Search' class='gray_button'>
-            </form>
-        </div>
+        echo("
+            <a href='create_listing.php' class='gray_button'>New offer</a> <br><hr>
+            <div style='float:left;'>
+                <form action='jobs.php' method='get' class='myform'>
+                    Keyword: <input type='text' name='keyword' class='txt'>
+                    <input type='submit' value='Search' class='gray_button'>
+                </form>
+            </div>  
+            
         ");
+        echo("<div>");
         if($amount>$page_lim+3){
-            echo("
-        
-        <div style='float:right;'>
-            <form action='jobs.php' method='get' class='myform'>
-                <input type='hidden' name='page' id='page' value=$next>
-                <input type='submit' value='>>' class='gray_button'>
-            </form>
-        </div>  
+        echo("
+                
+                    <div style='float:right;'>
+                        <form action='jobs.php' method='get' class='myform'>
+                            <input type='hidden' name='page' id='page' value=$next>
+                            <input type='hidden' name='keyword' id='keyword' value=$kw>
+                            <input type='submit' value='>>' class='gray_button'>
+                        </form>
+                    </div>  
             ");
         }
         if($page!=1){
-            echo("
-        <div style='float:right;'>
-            <form action='jobs.php' method='get' class='myform'>
-                <input type='hidden' name='page' id='page' value=$prev>
-                <input type='submit' value='<<' class='gray_button'>
-            </form>
-        </div>
-        ");
+        echo("
+                    <div style='float:right;'>
+                        <form action='jobs.php' method='get' class='myform'>
+                            <input type='hidden' name='keyword' id='keyword' value=$kw>
+                            <input type='hidden' name='page' id='page' value=$prev>
+                            <input type='submit' value='<<' class='gray_button'>
+                        </form>
+                    </div>
+            ");            
         }
-        echo("</div><br><br><br>");
-    
-    
+        echo("</div><br><br><br><div style='margin-left:10px;'>Page: $page</div><br>");
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
           $url = $row["url"];

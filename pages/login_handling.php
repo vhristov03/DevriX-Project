@@ -1,7 +1,7 @@
 <?php 
     include 'connect_to_db.php';
 
-    $name = $_POST["name"];
+    $name = mysqli_real_escape_string($database,$_POST["name"]);
     $password = $_POST["password"];
     $password = hash("sha256", $password, false);
 

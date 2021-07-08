@@ -8,8 +8,10 @@
 
 <body>
    
-    <h1>Pending job listings:</h1>
+    
     <?php
+    include 'connect_to_db.php';
+
     //pagination
     if(isset($_GET["page"])==true){
         $page = $_GET["page"];
@@ -23,40 +25,72 @@
     $next = $page+1;
     $page_lim = $prev*3;
 
-    //database stuff
-    include 'connect_to_db.php';
 
-    $amountsql = "select count(id) from `pending_job_listings`";
+    //search
+    if(isset($_GET["keyword"])==true){
+        $kw = mysqli_real_escape_string($database,$_GET["keyword"]);    
+    }else{
+        $kw="";
+    }
+
+//--------------------------------------------------------------------------------------------------
+
+        //queries
+        
+        //listings count
+    $amountsql = "select count(id) from `pending_job_listings`
+    where  
+        `title` like '%$kw%' or
+        `description` like '%$kw%' or
+        `company` like '%$kw%'
+    ";
     $amount=$database->query($amountsql)->fetch_row()[0]; 
-
-    $sql = "select `id`,`title`,`description`,`salary`,`company`,`url` from `pending_job_listings` limit $page_lim,3";
+        //listings info
+    $sql = "select `id`,`title`,`description`,`salary`,`company`,`url` from `pending_job_listings`  
+    where
+        `title` like '%$kw%' or
+        `description` like '%$kw%' or
+        `company` like '%$kw%'
+        limit $page_lim,3";
+    
     $result=$database->query($sql) or die("Can't pull information from the database");
 
+//-------------------------------------------------------------------------------------------------
+
     //Page contents
-    echo("There are currently $amount pending job listings<br><br>");
+    echo("<h1>Pending job offers:</h1>");
+    echo("There are currently $amount pending job offers<br><br>");
     echo(" 
-    <div style='float: left;'> 
-        <form action='editpage.php' method='post'>
-            <input type='submit' value='Edit existing job offers' class='gray_button'>
-        </form>
-    </div>
-    <div style='float: right;'> 
-        <form action='jobs.php' method='post'>
-            <input type='submit' value='Back to user side' class='gray_button'>
-        </form>
-    </div>
-    <br><br><hr><br>
+        <div style='float: left;'> 
+            <form action='editpage.php' method='post'>
+                <input type='submit' value='Edit existing job offers' class='gray_button'>
+            </form>
+        </div>
+        <div style='float: right;'> 
+            <form action='jobs.php' method='post'>
+                <input type='submit' value='Back to user side' class='gray_button'>
+            </form>
+        </div>
+        <br><br><hr><br>
+        <div style='float:left;'>
+            <form action='adminpanel.php' method='get' class='myform'>
+                Keyword: <input type='text' name='keyword' class='txt'>
+                <input type='submit' value='Search' class='gray_button'>
+            </form>
+        </div>
       ");
     //pagination
+    echo("<div>");
     if($amount>$page_lim+3){
         echo("
-        <div>
-            <div style='float:right;'>
-                <form action='adminpanel.php' method='get' class='myform'>
-                    <input type='hidden' name='page' id='page' value=$next>
-                    <input type='submit' value='>>' class='gray_button'>
-            </form>
-        </div>  
+            
+                <div style='float:right;'>
+                    <form action='adminpanel.php' method='get' class='myform'>
+                        <input type='hidden' name='page' id='page' value=$next>
+                        <input type='hidden' name='keyword' id='keyword' value=$kw>
+                        <input type='submit' value='>>' class='gray_button'>
+                    </form>
+                </div>  
         ");
     }
     if($page!=1){
@@ -64,12 +98,13 @@
             <div style='float:right;'>
                 <form action='adminpanel.php' method='get' class='myform'>
                     <input type='hidden' name='page' id='page' value=$prev>
+                    <input type='hidden' name='keyword' id='keyword' value=$kw>
                     <input type='submit' value='<<' class='gray_button'>
                 </form>
-            </div>
-        </div>
+            </div>  
     ");
     }
+    echo("</div><br><br><br><div style='margin-left:10px;'>Page: $page</div><br>");
     
     
     $counter = 0;
